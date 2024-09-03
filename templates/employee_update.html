@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Update</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #004080, #001f3f);
+        }
+
+        .form-container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 28px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-row .form-group {
+            width: 48%;
+        }
+
+        label {
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 12px 0;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+            width: 48%;
+        }
+
+        button:hover {
+            background: #0056b3;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-cancel {
+            background: rgba(255, 0, 0, 0.7);
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 46px;
+            width: 48%;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255, 0, 0, 0.9);
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media only screen and (max-width: 1024px) {
+            .form-container {
+                max-width: 80%;
+                padding: 30px;
+            }
+
+            h2 {
+                font-size: 24px;
+                padding-bottom: 8px;
+            }
+
+            button, .btn-cancel {
+                font-size: 16px;
+            }
+        }
+
+        @media only screen and (max-height: 768px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            button, .btn-cancel {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Employee Data Update</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form.first_name.label_tag }}{{ form.first_name }}
+                </div>
+                <div class="form-group">
+                    {{ form.last_name.label_tag }}{{ form.last_name }}
+                </div>
+            </div>
+            <!-- Other form fields -->
+            <div class="form-group">
+                {{ form.email.label_tag }}{{ form.email }}
+                {{ form.dob.label_tag }}{{ form.dob }}
+                {{ form.department.label_tag }}{{ form.department }}
+                {{ form.phone_number.label_tag }}{{ form.phone_number }}
+                {{ form.address.label_tag }}{{ form.address }}
+                {{ form.salary.label_tag }}{{ form.salary }}
+            </div>
+            <div class="button-row">
+                <button type="submit">Update</button>
+                <a href="{% url 'employee_list' %}" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
